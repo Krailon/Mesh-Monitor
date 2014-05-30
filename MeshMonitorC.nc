@@ -224,7 +224,7 @@ implementation {
 			sendData();
 		}
 		else {
-			Leds.led0On();
+			call Leds.led0On();
 		}
 	}
 
