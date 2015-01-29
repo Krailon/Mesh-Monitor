@@ -1,0 +1,13 @@
+.sxp-version 2.0
+
+.assembly MeshMonitor-1.0
+
+
+.namespace TRU.MeshMonitor
+
+.class#0 public MeshMonitor
+
+	.method#0 static public MeshMonitor(r:TRU.MeshMonitor.MeshMonitor this)v
+.end
+
+.end
