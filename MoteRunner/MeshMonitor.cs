@@ -17,6 +17,7 @@ namespace TRU.MeshMonitor {
 
 		static MeshMonitor() {
 			LED.setState(IRIS.LED_YELLOW, 1);
+
 			Assembly.setDataHandler(onData);
 			GPIO_Device.open();
 			GPIO_Device.configureOutput(LIGHT_PWR_PIN, GPIO.OUT_SET);
@@ -29,13 +30,11 @@ namespace TRU.MeshMonitor {
 		}
 
 		private static int onData(uint Info, byte[] Buffer, uint Length) {
-			LED.setState(IRIS.LED_RED, 1);
 			Util.copyData(Buffer, 0, Reply, 0, Length);
-			LED.setState(IRIS.LED_RED, 0);
 			return 0;
 		}
 
-		private static int ADCReadCallback(uint Flags, byte[] Data, uint Length, uint Info, long Time) {
+		private static int ADCReadCallback(uint ReadFlags, byte[] ReadData, uint ReadLength, uint ReadInfo, long ReadTime) {
 			uint offset = LIP.getPortOff() + 1;
 			byte[] sensor;
 
@@ -52,11 +51,12 @@ namespace TRU.MeshMonitor {
 			}
 
 			Util.copyData(sensor, 0, Reply, offset, 2);
-			Util.copyData(Data, 0, Reply, offset, 2);
+			Util.copyData(ReadData, 0, Reply, offset + 2, 2);
 			LIP.send(Reply, 0, REPLY_SIZE);
-			LED.setState(IRIS.LED_YELLOW, 0);
 
-			return 0;
+            ADC_Device.read(Device.TIMED, 1, Time.currentTicks() + Time.toTickSpan(Time.SECONDS, READ_INTERVAL));
+			LED.setState(IRIS.LED_YELLOW, 0);
+            return 0;
 		}
 
 	}

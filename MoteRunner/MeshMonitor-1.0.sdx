@@ -1,4 +1,4 @@
-A!	MeshMonitor-1.0.31294	2.0	C#
+A!	MeshMonitor-1.0.28815	2.0	C#
 
 X	c:01/000	com.ibm.saguaro.system.Assembly
 X	c:01/001	com.ibm.saguaro.system.Util
@@ -40,9 +40,9 @@ G	LIGHT_PWR_PIN	b	0	37
 G	READ_INTERVAL	u	0	5
 G	REPLY_SIZE	u	0	64
 G	TEMP_PWR_PIN	b	0	16
-M	ADCReadCallback(u,b[],u,u,l)i	-1	m:004F	0009E	138
-M!	MeshMonitor(r:TRU.MeshMonitor.MeshMonitor)v	-1	m:0094	00128	6
-M	onData(u,b[],u)i	-1	m:0097	0012E	28
+M	ADCReadCallback(u,b[],u,u,l)i	-1	m:004F	0009E	158
+M!	MeshMonitor(r:TRU.MeshMonitor.MeshMonitor)v	-1	m:009E	0013C	6
+M	onData(u,b[],u)i	-1	m:00A1	00142	18
 
 C	c:005	com.ibm.saguaro.system.$tatics	-1	-1	c:01/000
 r	TRU.MeshMonitor.MeshMonitor.Reply	b[]	-1	0
@@ -55,55 +55,54 @@ c	00033	0	15	0	15	0	m:000E
 c	0003D	0	16	0	16	0	m:000E
 c	00043	0	18	0	18	0	m:000E
 c	00044	0	19	0	19	0	m:000E
-c	0004A	0	20	0	20	0	m:000E
-c	00052	0	21	0	21	0	m:000E
-c	00059	0	22	0	22	0	m:000E
-c	00064	0	23	0	23	0	m:000E
-c	00071	0	24	0	24	0	m:000E
-c	0007C	0	25	0	25	0	m:000E
-c	0008F	0	27	0	27	0	m:000E
-c	00095	0	28	0	28	0	m:000E
-c	0009B	0	29	0	29	0	m:000E
+c	0004A	0	21	0	21	0	m:000E
+c	00052	0	22	0	22	0	m:000E
+c	00059	0	23	0	23	0	m:000E
+c	00064	0	24	0	24	0	m:000E
+c	00071	0	25	0	25	0	m:000E
+c	0007C	0	26	0	26	0	m:000E
+c	0008F	0	28	0	28	0	m:000E
+c	00095	0	29	0	29	0	m:000E
+c	0009B	0	30	0	30	0	m:000E
 e	0009E	m:000E
-c	000A1	0	39	0	39	0	m:004F
-l	000A1	00128	i	CS$1$0000	m:004F	8
-l	000A1	00128	z	CS$4$0001	m:004F	9
-l	000A1	00128	b[]	CS$0$0002	m:004F	10
-l	000A1	00128	u	offset	m:004F	6
-l	000A1	00128	b[]	sensor	m:004F	7
-l	000A1	00128	u	Flags	m:004F	0
-l	000A1	00128	b[]	Data	m:004F	1
-l	000A1	00128	u	Length	m:004F	2
-l	000A1	00128	u	Info	m:004F	3
-l	000A1	00128	l	Time	m:004F	4
-c	000A7	0	42	0	42	0	m:004F
-c	000AC	0	43	0	43	0	m:004F
-c	000BF	0	44	0	44	0	m:004F
-c	000C6	0	45	0	45	0	m:004F
-c	000D1	0	46	0	46	0	m:004F
-c	000DD	0	49	0	49	0	m:004F
-c	000E9	0	50	0	50	0	m:004F
-c	000F4	0	51	0	51	0	m:004F
-c	000FE	0	54	0	54	0	m:004F
-c	00109	0	55	0	55	0	m:004F
-c	00114	0	56	0	56	0	m:004F
-c	0011D	0	57	0	57	0	m:004F
-c	00122	0	59	0	59	0	m:004F
-c	00125	0	60	0	60	0	m:004F
-e	00128	m:004F
-l!	0012B	0012E	r:TRU.MeshMonitor.MeshMonitor	this	m:0094	0
-e!	0012E	m:0094
-c	00131	0	32	0	32	0	m:0097
-l	00131	0014A	i	CS$1$0000	m:0097	3
-l	00131	0014A	u	Info	m:0097	0
-l	00131	0014A	b[]	Buffer	m:0097	1
-l	00131	0014A	u	Length	m:0097	2
-c	00136	0	33	0	33	0	m:0097
-c	00141	0	34	0	34	0	m:0097
-c	00146	0	35	0	35	0	m:0097
-c	00148	0	36	0	36	0	m:0097
-e	0014A	m:0097
-S	C:\users\kerberos\dropbox\programming\repos\mesh-monitor\moterunner\MeshMonitor.cs
+c	000A1	0	38	0	38	0	m:004F
+l	000A1	0013C	i	CS$1$0000	m:004F	8
+l	000A1	0013C	z	CS$4$0001	m:004F	9
+l	000A1	0013C	b[]	CS$0$0002	m:004F	10
+l	000A1	0013C	u	offset	m:004F	6
+l	000A1	0013C	b[]	sensor	m:004F	7
+l	000A1	0013C	u	ReadFlags	m:004F	0
+l	000A1	0013C	b[]	ReadData	m:004F	1
+l	000A1	0013C	u	ReadLength	m:004F	2
+l	000A1	0013C	u	ReadInfo	m:004F	3
+l	000A1	0013C	l	ReadTime	m:004F	4
+c	000A7	0	41	0	41	0	m:004F
+c	000AC	0	42	0	42	0	m:004F
+c	000BF	0	43	0	43	0	m:004F
+c	000C6	0	44	0	44	0	m:004F
+c	000D1	0	45	0	45	0	m:004F
+c	000DD	0	48	0	48	0	m:004F
+c	000E9	0	49	0	49	0	m:004F
+c	000F4	0	50	0	50	0	m:004F
+c	000FE	0	53	0	53	0	m:004F
+c	00109	0	54	0	54	0	m:004F
+c	00116	0	55	0	55	0	m:004F
+c	0011F	0	57	0	57	0	m:004F
+c	00131	0	58	0	58	0	m:004F
+c	00136	0	59	0	59	0	m:004F
+c	00139	0	60	0	60	0	m:004F
+e	0013C	m:004F
+l!	0013F	00142	r:TRU.MeshMonitor.MeshMonitor	this	m:009E	0
+e!	00142	m:009E
+c	00145	0	33	0	33	0	m:00A1
+l	00145	00154	i	CS$1$0000	m:00A1	3
+l	00145	00154	u	Info	m:00A1	0
+l	00145	00154	b[]	Buffer	m:00A1	1
+l	00145	00154	u	Length	m:00A1	2
+c	00150	0	34	0	34	0	m:00A1
+c	00152	0	35	0	35	0	m:00A1
+e	00154	m:00A1
+S	C:\Users\Kerberos\Dropbox\Programming\Repos\Mesh-Monitor\MoteRunner\MeshMonitor.cs
 :	namespace TRU.MeshMonitor {
 :		using com.ibm.saguaro.system;
 :		using com.ibm.iris;
@@ -123,6 +122,7 @@ S	C:\users\kerberos\dropbox\programming\repos\mesh-monitor\moterunner\MeshMonito
 :	
 :			static MeshMonitor() {
 :				LED.setState(IRIS.LED_YELLOW, 1);
+:	
 :				Assembly.setDataHandler(onData);
 :				GPIO_Device.open();
 :				GPIO_Device.configureOutput(LIGHT_PWR_PIN, GPIO.OUT_SET);
@@ -135,13 +135,11 @@ S	C:\users\kerberos\dropbox\programming\repos\mesh-monitor\moterunner\MeshMonito
 :			}
 :	
 :			private static int onData(uint Info, byte[] Buffer, uint Length) {
-:				LED.setState(IRIS.LED_RED, 1);
 :				Util.copyData(Buffer, 0, Reply, 0, Length);
-:				LED.setState(IRIS.LED_RED, 0);
 :				return 0;
 :			}
 :	
-:			private static int ADCReadCallback(uint Flags, byte[] Data, uint Length, uint Info, long Time) {
+:			private static int ADCReadCallback(uint ReadFlags, byte[] ReadData, uint ReadLength, uint ReadInfo, long ReadTime) {
 :				uint offset = LIP.getPortOff() + 1;
 :				byte[] sensor;
 :	
@@ -158,11 +156,12 @@ S	C:\users\kerberos\dropbox\programming\repos\mesh-monitor\moterunner\MeshMonito
 :				}
 :	
 :				Util.copyData(sensor, 0, Reply, offset, 2);
-:				Util.copyData(Data, 0, Reply, offset, 2);
+:				Util.copyData(ReadData, 0, Reply, offset + 2, 2);
 :				LIP.send(Reply, 0, REPLY_SIZE);
-:				LED.setState(IRIS.LED_YELLOW, 0);
 :	
-:				return 0;
+:	            ADC_Device.read(Device.TIMED, 1, Time.currentTicks() + Time.toTickSpan(Time.SECONDS, READ_INTERVAL));
+:				LED.setState(IRIS.LED_YELLOW, 0);
+:	            return 0;
 :			}
 :	
 :		}
