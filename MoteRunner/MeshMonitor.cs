@@ -68,7 +68,7 @@ namespace TRU.MeshMonitor {
                 // Queue light sensor read
                 LightSensor.open(IRIS.DID_MTS400_LIGHT, null, 0, 0);
                 LightSensor.setReadHandler(LightCallback);
-                LightSensor.read(Device.TIMED, 2, Time.currentTicks() + Time.toTickSpan(Time.SECONDS, READ_INTERVAL));
+                LightSensor.read(Device.TIMED, 2, Time.currentTicks() + 100);
 
                 LED.setState(IRIS.LED_YELLOW, 0);
             }
