@@ -65,6 +65,10 @@ namespace TRU.MeshMonitor {
                 Util.copyData(new byte[] {0}, 0, Reply, payload_offset, 1); // Humidit+Temperature ID = 0
                 Util.copyData(ReadData, 0, Reply, payload_offset + 1, ReadLength);
 
+                if (HumidTempSensor.getState() != Device.S_CLOSED) {
+                    HumidTempSensor.close();
+                }
+
                 // Queue light sensor read
                 LightSensor.open(IRIS.DID_MTS400_LIGHT, null, 0, 0);
                 LightSensor.setReadHandler(LightCallback);
@@ -90,6 +94,10 @@ namespace TRU.MeshMonitor {
                 Util.copyData(new byte[] {1}, 0, Reply, payload_offset + 5, 1); // Light ID = 1
                 Util.copyData(ReadData, 0, Reply, payload_offset + 6, ReadLength);
                 LIP.send(Reply, 0, REPLY_SIZE);
+
+                if (LightSensor.getState() != Device.S_CLOSED) {
+                    LightSensor.close();
+                }
 
                 // Queue humidity/temperature sensor read
                 HumidTempSensor.open(IRIS.DID_MTS400_HUMID_TEMP, null, 0, 0);

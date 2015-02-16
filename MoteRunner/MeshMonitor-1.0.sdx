@@ -1,4 +1,4 @@
-A!	MeshMonitor-1.0.06947	2.0	C#
+A!	MeshMonitor-1.0.47191	2.0	C#
 
 X	c:01/000	com.ibm.saguaro.system.Assembly
 X	c:01/001	com.ibm.saguaro.system.Util
@@ -43,10 +43,10 @@ G	LIGHT_PWR_PIN	b	0	37
 G	READ_INTERVAL	u	0	5
 G	REPLY_SIZE	u	0	64
 G	TEMP_PWR_PIN	b	0	16
-M	HumidTempCallback(u,b[],u,u,l)i	-1	m:005E	000BC	114
-M	LightCallback(u,b[],u,u,l)i	-1	m:0097	0012E	132
-M!	MeshMonitor(r:TRU.MeshMonitor.MeshMonitor)v	-1	m:00D9	001B2	6
-M	on_Data(u,b[],u)i	-1	m:00DC	001B8	18
+M	HumidTempCallback(u,b[],u,u,l)i	-1	m:005E	000BC	134
+M	LightCallback(u,b[],u,u,l)i	-1	m:00A1	00142	152
+M!	MeshMonitor(r:TRU.MeshMonitor.MeshMonitor)v	-1	m:00ED	001DA	6
+M	on_Data(u,b[],u)i	-1	m:00F0	001E0	18
 
 C	c:005	com.ibm.saguaro.system.$tatics	-1	-1	c:01/000
 r	TRU.MeshMonitor.MeshMonitor.Reply	b[]	-1	0
@@ -78,62 +78,66 @@ c	000B5	0	37	0	37	0	m:0014
 c	000B8	0	47	0	47	0	m:0014
 e	000BC	m:0014
 c	000BF	0	56	0	56	0	m:005E
-l	000BF	0012D	i	CS$1$0000	m:005E	7
-l	000BF	0012D	z	CS$4$0001	m:005E	8
-l	000BF	0012D	b[]	CS$0$0002	m:005E	9
-l	000BF	0012D	u	ReadFlags	m:005E	0
-l	000BF	0012D	b[]	ReadData	m:005E	1
-l	000BF	0012D	u	ReadLength	m:005E	2
-l	000BF	0012D	u	ReadInfo	m:005E	3
-l	000BF	0012D	l	ReadTime	m:005E	4
+l	000BF	00141	i	CS$1$0000	m:005E	7
+l	000BF	00141	z	CS$4$0001	m:005E	8
+l	000BF	00141	b[]	CS$0$0002	m:005E	9
+l	000BF	00141	u	ReadFlags	m:005E	0
+l	000BF	00141	b[]	ReadData	m:005E	1
+l	000BF	00141	u	ReadLength	m:005E	2
+l	000BF	00141	u	ReadInfo	m:005E	3
+l	000BF	00141	l	ReadTime	m:005E	4
 c	000CB	0	57	0	57	0	m:005E
 c	000D0	0	58	0	58	0	m:005E
 c	000D7	0	61	0	61	0	m:005E
-l	000D7	00129	u	payload_offset	m:005E	6
+l	000D7	0013D	u	payload_offset	m:005E	6
 c	000DD	0	64	0	64	0	m:005E
 c	000E2	0	65	0	65	0	m:005E
 c	000F2	0	66	0	66	0	m:005E
-c	000FF	0	69	0	69	0	m:005E
-c	0010B	0	70	0	70	0	m:005E
-c	00115	0	71	0	71	0	m:005E
-c	00124	0	73	0	73	0	m:005E
-c	00129	0	76	0	76	0	m:005E
-c	0012B	0	77	0	77	0	m:005E
-e	0012E	m:005E
-c	00131	0	81	0	81	0	m:0097
-l	00131	001B2	i	CS$1$0000	m:0097	7
-l	00131	001B2	z	CS$4$0001	m:0097	8
-l	00131	001B2	b[]	CS$0$0002	m:0097	9
-l	00131	001B2	u	ReadFlags	m:0097	0
-l	00131	001B2	b[]	ReadData	m:0097	1
-l	00131	001B2	u	ReadLength	m:0097	2
-l	00131	001B2	u	ReadInfo	m:0097	3
-l	00131	001B2	l	ReadTime	m:0097	4
-c	0013D	0	82	0	82	0	m:0097
-c	00142	0	83	0	83	0	m:0097
-c	00149	0	86	0	86	0	m:0097
-l	00149	001AE	u	payload_offset	m:0097	6
-c	0014F	0	89	0	89	0	m:0097
-c	00154	0	90	0	90	0	m:0097
-c	0016B	0	91	0	91	0	m:0097
-c	00178	0	92	0	92	0	m:0097
-c	00181	0	95	0	95	0	m:0097
-c	0018D	0	96	0	96	0	m:0097
-c	00197	0	97	0	97	0	m:0097
-c	001A9	0	99	0	99	0	m:0097
-c	001AE	0	102	0	102	0	m:0097
-c	001B0	0	103	0	103	0	m:0097
-e	001B2	m:0097
-l!	001B5	001B8	r:TRU.MeshMonitor.MeshMonitor	this	m:00D9	0
-e!	001B8	m:00D9
-c	001BB	0	50	0	50	0	m:00DC
-l	001BB	001CA	i	CS$1$0000	m:00DC	3
-l	001BB	001CA	u	Info	m:00DC	0
-l	001BB	001CA	b[]	Buffer	m:00DC	1
-l	001BB	001CA	u	Length	m:00DC	2
-c	001C6	0	51	0	51	0	m:00DC
-c	001C8	0	52	0	52	0	m:00DC
-e	001CA	m:00DC
+c	000FF	0	68	0	68	0	m:005E
+c	0010D	0	69	0	69	0	m:005E
+c	00113	0	73	0	73	0	m:005E
+c	0011F	0	74	0	74	0	m:005E
+c	00129	0	75	0	75	0	m:005E
+c	00138	0	77	0	77	0	m:005E
+c	0013D	0	80	0	80	0	m:005E
+c	0013F	0	81	0	81	0	m:005E
+e	00142	m:005E
+c	00145	0	85	0	85	0	m:00A1
+l	00145	001DA	i	CS$1$0000	m:00A1	7
+l	00145	001DA	z	CS$4$0001	m:00A1	8
+l	00145	001DA	b[]	CS$0$0002	m:00A1	9
+l	00145	001DA	u	ReadFlags	m:00A1	0
+l	00145	001DA	b[]	ReadData	m:00A1	1
+l	00145	001DA	u	ReadLength	m:00A1	2
+l	00145	001DA	u	ReadInfo	m:00A1	3
+l	00145	001DA	l	ReadTime	m:00A1	4
+c	00151	0	86	0	86	0	m:00A1
+c	00156	0	87	0	87	0	m:00A1
+c	0015D	0	90	0	90	0	m:00A1
+l	0015D	001D6	u	payload_offset	m:00A1	6
+c	00163	0	93	0	93	0	m:00A1
+c	00168	0	94	0	94	0	m:00A1
+c	0017F	0	95	0	95	0	m:00A1
+c	0018C	0	96	0	96	0	m:00A1
+c	00195	0	98	0	98	0	m:00A1
+c	001A3	0	99	0	99	0	m:00A1
+c	001A9	0	103	0	103	0	m:00A1
+c	001B5	0	104	0	104	0	m:00A1
+c	001BF	0	105	0	105	0	m:00A1
+c	001D1	0	107	0	107	0	m:00A1
+c	001D6	0	110	0	110	0	m:00A1
+c	001D8	0	111	0	111	0	m:00A1
+e	001DA	m:00A1
+l!	001DD	001E0	r:TRU.MeshMonitor.MeshMonitor	this	m:00ED	0
+e!	001E0	m:00ED
+c	001E3	0	50	0	50	0	m:00F0
+l	001E3	001F2	i	CS$1$0000	m:00F0	3
+l	001E3	001F2	u	Info	m:00F0	0
+l	001E3	001F2	b[]	Buffer	m:00F0	1
+l	001E3	001F2	u	Length	m:00F0	2
+c	001EE	0	51	0	51	0	m:00F0
+c	001F0	0	52	0	52	0	m:00F0
+e	001F2	m:00F0
 S	C:\Users\Kerberos\Dropbox\Programming\Repos\Mesh-Monitor\MoteRunner\MeshMonitor.cs
 :	namespace TRU.MeshMonitor {
 :		using com.ibm.saguaro.system;
@@ -202,6 +206,10 @@ S	C:\Users\Kerberos\Dropbox\Programming\Repos\Mesh-Monitor\MoteRunner\MeshMonito
 :	                Util.copyData(new byte[] {0}, 0, Reply, payload_offset, 1); // Humidit+Temperature ID = 0
 :	                Util.copyData(ReadData, 0, Reply, payload_offset + 1, ReadLength);
 :	
+:	                if (HumidTempSensor.getState() != Device.S_CLOSED) {
+:	                    HumidTempSensor.close();
+:	                }
+:	
 :	                // Queue light sensor read
 :	                LightSensor.open(IRIS.DID_MTS400_LIGHT, null, 0, 0);
 :	                LightSensor.setReadHandler(LightCallback);
@@ -227,6 +235,10 @@ S	C:\Users\Kerberos\Dropbox\Programming\Repos\Mesh-Monitor\MoteRunner\MeshMonito
 :	                Util.copyData(new byte[] {1}, 0, Reply, payload_offset + 5, 1); // Light ID = 1
 :	                Util.copyData(ReadData, 0, Reply, payload_offset + 6, ReadLength);
 :	                LIP.send(Reply, 0, REPLY_SIZE);
+:	
+:	                if (LightSensor.getState() != Device.S_CLOSED) {
+:	                    LightSensor.close();
+:	                }
 :	
 :	                // Queue humidity/temperature sensor read
 :	                HumidTempSensor.open(IRIS.DID_MTS400_HUMID_TEMP, null, 0, 0);
