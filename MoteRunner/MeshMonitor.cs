@@ -24,9 +24,13 @@ namespace TRU.MeshMonitor {
 			LED.setState(IRIS.LED_YELLOW, 1);
 
 			Assembly.setDataHandler(on_Data);
+            Assembly.setSystemInfoCallback(on_SysInfo);
             try {
-                HumidTempSensor.open(IRIS.DID_MTS400_HUMID_TEMP, null, 0, 0);
+                // Init read handlers
+                LightSensor.setReadHandler(LightCallback);
                 HumidTempSensor.setReadHandler(HumidTempCallback);
+
+                HumidTempSensor.open(IRIS.DID_MTS400_HUMID_TEMP, null, 0, 0);
                 HumidTempSensor.read(Device.TIMED, 4, Time.currentTicks() + Time.toTickSpan(Time.SECONDS, READ_INTERVAL));
 
                 LED.setState(IRIS.LED_YELLOW, 0);
@@ -36,33 +40,49 @@ namespace TRU.MeshMonitor {
                 LED.setState(IRIS.LED_RED, 1);
                 return;
             }
-
-			/*
-            GPIO_Device.open();
-			GPIO_Device.configureOutput(LIGHT_PWR_PIN, GPIO.OUT_SET);
-			ADC_Device.open(ADC_CHANNEL_MASK, GPIO.NO_PIN, 0, 0); // Manual power; No warmup; No interval (ltr)
-			ADC_Device.setReadHandler(ADCReadCallback);
-			ADC_Device.read(Device.TIMED, 1, Time.currentTicks() + Time.toTickSpan(Time.SECONDS, READ_INTERVAL));
-             */
-		}
+        }
 
 		private static int on_Data(uint Info, byte[] Buffer, uint Length) {
 			Util.copyData(Buffer, 0, Reply, 0, Length);
 			return 0;
 		}
 
+        private static int on_SysInfo(int Type, int Info)
+        {
+            if (Type == Assembly.SYSEV_DELETED)
+            {
+                try
+                {
+                    if (HumidTempSensor != null)
+                    {
+                        HumidTempSensor.close();
+                    }
+                    if (LightSensor != null)
+                    {
+                        LightSensor.close();
+                    }
+                }
+                catch (MoteException ex)
+                {
+                }
+            }
+
+            return 0;
+        }
+
         private static int HumidTempCallback(uint ReadFlags, byte[] ReadData, uint ReadLength, uint ReadInfo, long ReadTime) {
-            // Check flags
-            if ((ReadFlags & FLAG_FAILED) != 0) {
+            if ((ReadFlags & FLAG_FAILED) != 0)
+            {
                 LED.setState(IRIS.LED_YELLOW, 1);
                 LED.setState(IRIS.LED_RED, 1);
+                return -1;
             }
             else {
                 uint payload_offset = LIP.getPortOff() + 1;
 
                 // Copy sensor data into reply buffer
                 LED.setState(IRIS.LED_YELLOW, 1);
-                Util.copyData(new byte[] {0}, 0, Reply, payload_offset, 1); // Humidit+Temperature ID = 0
+                Util.copyData(new byte[] {0}, 0, Reply, payload_offset, 1); // Humidity+Temperature ID = 0
                 Util.copyData(ReadData, 0, Reply, payload_offset + 1, ReadLength);
 
                 if (HumidTempSensor.getState() != Device.S_CLOSED) {
@@ -71,8 +91,7 @@ namespace TRU.MeshMonitor {
 
                 // Queue light sensor read
                 LightSensor.open(IRIS.DID_MTS400_LIGHT, null, 0, 0);
-                LightSensor.setReadHandler(LightCallback);
-                LightSensor.read(Device.TIMED, 2, Time.currentTicks() + 100);
+                LightSensor.read(Device.ASAP, 2, 0);
 
                 LED.setState(IRIS.LED_YELLOW, 0);
             }
@@ -85,6 +104,7 @@ namespace TRU.MeshMonitor {
             if ((ReadFlags & FLAG_FAILED) != 0) {
                 LED.setState(IRIS.LED_YELLOW, 1);
                 LED.setState(IRIS.LED_RED, 1);
+                return -1;
             }
             else {
                 uint payload_offset = LIP.getPortOff() + 1;
@@ -95,14 +115,14 @@ namespace TRU.MeshMonitor {
                 Util.copyData(ReadData, 0, Reply, payload_offset + 6, ReadLength);
                 LIP.send(Reply, 0, REPLY_SIZE);
 
-                if (LightSensor.getState() != Device.S_CLOSED) {
+                if (LightSensor.getState() != Device.S_CLOSED)
+                {
                     LightSensor.close();
                 }
 
                 // Queue humidity/temperature sensor read
-                HumidTempSensor.open(IRIS.DID_MTS400_HUMID_TEMP, null, 0, 0);
-                HumidTempSensor.setReadHandler(HumidTempCallback);
-                HumidTempSensor.read(Device.TIMED, 4, Time.currentTicks() + Time.toTickSpan(Time.SECONDS, READ_INTERVAL));
+                //HumidTempSensor.open(IRIS.DID_MTS400_HUMID_TEMP, null, 0, 0);
+                //HumidTempSensor.read(Device.TIMED, 4, Time.currentTicks() + Time.toTickSpan(Time.SECONDS, READ_INTERVAL));
                 
                 LED.setState(IRIS.LED_YELLOW, 0);
             }

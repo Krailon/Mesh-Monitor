@@ -1,4 +1,4 @@
-A!	MeshMonitor-1.0.47191	2.0	C#
+A!	MeshMonitor-1.0.56544	2.0	C#
 
 X	c:01/000	com.ibm.saguaro.system.Assembly
 X	c:01/001	com.ibm.saguaro.system.Util
@@ -43,10 +43,11 @@ G	LIGHT_PWR_PIN	b	0	37
 G	READ_INTERVAL	u	0	5
 G	REPLY_SIZE	u	0	64
 G	TEMP_PWR_PIN	b	0	16
-M	HumidTempCallback(u,b[],u,u,l)i	-1	m:005E	000BC	134
-M	LightCallback(u,b[],u,u,l)i	-1	m:00A1	00142	152
-M!	MeshMonitor(r:TRU.MeshMonitor.MeshMonitor)v	-1	m:00ED	001DA	6
-M	on_Data(u,b[],u)i	-1	m:00F0	001E0	18
+M	HumidTempCallback(u,b[],u,u,l)i	-1	m:0084	00108	120
+M	LightCallback(u,b[],u,u,l)i	-1	m:00C0	00180	114
+M!	MeshMonitor(r:TRU.MeshMonitor.MeshMonitor)v	-1	m:00F9	001F2	6
+M	on_Data(u,b[],u)i	-1	m:00FC	001F8	18
+M	on_SysInfo(i,i)i	-1	m:006B	000D6	50
 
 C	c:005	com.ibm.saguaro.system.$tatics	-1	-1	c:01/000
 r	TRU.MeshMonitor.MeshMonitor.Reply	b[]	-1	0
@@ -54,90 +55,104 @@ r	TRU.MeshMonitor.MeshMonitor.ADC_Device	r:com.ibm.saguaro.system.ADC	-1	1
 r	TRU.MeshMonitor.MeshMonitor.GPIO_Device	r:com.ibm.saguaro.system.GPIO	-1	2
 r	TRU.MeshMonitor.MeshMonitor.HumidTempSensor	r:com.ibm.saguaro.system.SDev	-1	3
 r	TRU.MeshMonitor.MeshMonitor.LightSensor	r:com.ibm.saguaro.system.SDev	-1	4
-M	__init()v	-1	m:0014	00028	148
+M	__init()v	-1	m:0018	00030	166
 
-c	00035	0	15	0	15	0	m:0014
-c	0003F	0	16	0	16	0	m:0014
-c	00049	0	17	0	17	0	m:0014
-c	00053	0	19	0	19	0	m:0014
-c	0005D	0	20	0	20	0	m:0014
-c	00063	0	23	0	23	0	m:0014
-c	00064	0	24	0	24	0	m:0014
-c	0006A	0	26	0	26	0	m:0014
-c	00072	0	27	0	27	0	m:0014
-c	00073	0	28	0	28	0	m:0014
-c	00080	0	29	0	29	0	m:0014
-c	0008B	0	30	0	30	0	m:0014
-c	0009E	0	32	0	32	0	m:0014
-c	000A4	0	33	0	33	0	m:0014
-c	000AA	0	34	0	34	0	m:0014
-c	000AD	0	35	0	35	0	m:0014
-c	000AE	0	35	0	35	0	m:0014
-c	000AF	0	36	0	36	0	m:0014
-c	000B5	0	37	0	37	0	m:0014
-c	000B8	0	47	0	47	0	m:0014
-e	000BC	m:0014
-c	000BF	0	56	0	56	0	m:005E
-l	000BF	00141	i	CS$1$0000	m:005E	7
-l	000BF	00141	z	CS$4$0001	m:005E	8
-l	000BF	00141	b[]	CS$0$0002	m:005E	9
-l	000BF	00141	u	ReadFlags	m:005E	0
-l	000BF	00141	b[]	ReadData	m:005E	1
-l	000BF	00141	u	ReadLength	m:005E	2
-l	000BF	00141	u	ReadInfo	m:005E	3
-l	000BF	00141	l	ReadTime	m:005E	4
-c	000CB	0	57	0	57	0	m:005E
-c	000D0	0	58	0	58	0	m:005E
-c	000D7	0	61	0	61	0	m:005E
-l	000D7	0013D	u	payload_offset	m:005E	6
-c	000DD	0	64	0	64	0	m:005E
-c	000E2	0	65	0	65	0	m:005E
-c	000F2	0	66	0	66	0	m:005E
-c	000FF	0	68	0	68	0	m:005E
-c	0010D	0	69	0	69	0	m:005E
-c	00113	0	73	0	73	0	m:005E
-c	0011F	0	74	0	74	0	m:005E
-c	00129	0	75	0	75	0	m:005E
-c	00138	0	77	0	77	0	m:005E
-c	0013D	0	80	0	80	0	m:005E
-c	0013F	0	81	0	81	0	m:005E
-e	00142	m:005E
-c	00145	0	85	0	85	0	m:00A1
-l	00145	001DA	i	CS$1$0000	m:00A1	7
-l	00145	001DA	z	CS$4$0001	m:00A1	8
-l	00145	001DA	b[]	CS$0$0002	m:00A1	9
-l	00145	001DA	u	ReadFlags	m:00A1	0
-l	00145	001DA	b[]	ReadData	m:00A1	1
-l	00145	001DA	u	ReadLength	m:00A1	2
-l	00145	001DA	u	ReadInfo	m:00A1	3
-l	00145	001DA	l	ReadTime	m:00A1	4
-c	00151	0	86	0	86	0	m:00A1
-c	00156	0	87	0	87	0	m:00A1
-c	0015D	0	90	0	90	0	m:00A1
-l	0015D	001D6	u	payload_offset	m:00A1	6
-c	00163	0	93	0	93	0	m:00A1
-c	00168	0	94	0	94	0	m:00A1
-c	0017F	0	95	0	95	0	m:00A1
-c	0018C	0	96	0	96	0	m:00A1
-c	00195	0	98	0	98	0	m:00A1
-c	001A3	0	99	0	99	0	m:00A1
-c	001A9	0	103	0	103	0	m:00A1
-c	001B5	0	104	0	104	0	m:00A1
-c	001BF	0	105	0	105	0	m:00A1
-c	001D1	0	107	0	107	0	m:00A1
-c	001D6	0	110	0	110	0	m:00A1
-c	001D8	0	111	0	111	0	m:00A1
-e	001DA	m:00A1
-l!	001DD	001E0	r:TRU.MeshMonitor.MeshMonitor	this	m:00ED	0
-e!	001E0	m:00ED
-c	001E3	0	50	0	50	0	m:00F0
-l	001E3	001F2	i	CS$1$0000	m:00F0	3
-l	001E3	001F2	u	Info	m:00F0	0
-l	001E3	001F2	b[]	Buffer	m:00F0	1
-l	001E3	001F2	u	Length	m:00F0	2
-c	001EE	0	51	0	51	0	m:00F0
-c	001F0	0	52	0	52	0	m:00F0
-e	001F2	m:00F0
+c	0003D	0	15	0	15	0	m:0018
+c	00047	0	16	0	16	0	m:0018
+c	00051	0	17	0	17	0	m:0018
+c	0005B	0	19	0	19	0	m:0018
+c	00065	0	20	0	20	0	m:0018
+c	0006B	0	23	0	23	0	m:0018
+c	0006C	0	24	0	24	0	m:0018
+c	00072	0	26	0	26	0	m:0018
+c	0007A	0	27	0	27	0	m:0018
+c	00082	0	28	0	28	0	m:0018
+c	00083	0	30	0	30	0	m:0018
+c	0008E	0	31	0	31	0	m:0018
+c	00099	0	33	0	33	0	m:0018
+c	000A6	0	34	0	34	0	m:0018
+c	000B9	0	36	0	36	0	m:0018
+c	000BF	0	37	0	37	0	m:0018
+c	000C5	0	38	0	38	0	m:0018
+c	000C8	0	39	0	39	0	m:0018
+c	000C9	0	39	0	39	0	m:0018
+c	000CA	0	40	0	40	0	m:0018
+c	000D0	0	41	0	41	0	m:0018
+c	000D3	0	43	0	43	0	m:0018
+e	000D6	m:0018
+c	000D9	0	52	0	52	0	m:006B
+l	000D9	00107	i	CS$1$0000	m:006B	3
+l	000D9	00107	z	CS$4$0001	m:006B	4
+l	000D9	00107	i	Type	m:006B	0
+l	000D9	00107	i	Info	m:006B	1
+c	000E2	0	56	0	56	0	m:006B
+c	000EB	0	58	0	58	0	m:006B
+c	000F1	0	60	0	60	0	m:006B
+c	000FA	0	62	0	62	0	m:006B
+c	00102	0	65	0	65	0	m:006B
+c	00103	0	70	0	70	0	m:006B
+l	00103	00103	r:com.ibm.saguaro.system.MoteException	ex	m:006B	2
+c	00105	0	71	0	71	0	m:006B
+e	00108	m:006B
+c	0010B	0	74	0	74	0	m:0084
+l	0010B	00180	i	CS$1$0000	m:0084	7
+l	0010B	00180	z	CS$4$0001	m:0084	8
+l	0010B	00180	b[]	CS$0$0002	m:0084	9
+l	0010B	00180	u	ReadFlags	m:0084	0
+l	0010B	00180	b[]	ReadData	m:0084	1
+l	0010B	00180	u	ReadLength	m:0084	2
+l	0010B	00180	u	ReadInfo	m:0084	3
+l	0010B	00180	l	ReadTime	m:0084	4
+c	00117	0	76	0	76	0	m:0084
+c	0011C	0	77	0	77	0	m:0084
+c	00121	0	78	0	78	0	m:0084
+c	00125	0	81	0	81	0	m:0084
+l	00125	0017C	u	payload_offset	m:0084	6
+c	0012B	0	84	0	84	0	m:0084
+c	00130	0	85	0	85	0	m:0084
+c	00140	0	86	0	86	0	m:0084
+c	0014D	0	88	0	88	0	m:0084
+c	0015B	0	89	0	89	0	m:0084
+c	00161	0	93	0	93	0	m:0084
+c	0016D	0	94	0	94	0	m:0084
+c	00177	0	96	0	96	0	m:0084
+c	0017C	0	99	0	99	0	m:0084
+c	0017E	0	100	0	100	0	m:0084
+e	00180	m:0084
+c	00183	0	104	0	104	0	m:00C0
+l	00183	001F2	i	CS$1$0000	m:00C0	7
+l	00183	001F2	z	CS$4$0001	m:00C0	8
+l	00183	001F2	b[]	CS$0$0002	m:00C0	9
+l	00183	001F2	u	ReadFlags	m:00C0	0
+l	00183	001F2	b[]	ReadData	m:00C0	1
+l	00183	001F2	u	ReadLength	m:00C0	2
+l	00183	001F2	u	ReadInfo	m:00C0	3
+l	00183	001F2	l	ReadTime	m:00C0	4
+c	0018F	0	105	0	105	0	m:00C0
+c	00194	0	106	0	106	0	m:00C0
+c	00199	0	107	0	107	0	m:00C0
+c	0019D	0	110	0	110	0	m:00C0
+l	0019D	001EE	u	payload_offset	m:00C0	6
+c	001A3	0	113	0	113	0	m:00C0
+c	001A8	0	114	0	114	0	m:00C0
+c	001BF	0	115	0	115	0	m:00C0
+c	001CC	0	116	0	116	0	m:00C0
+c	001D5	0	118	0	118	0	m:00C0
+c	001E3	0	120	0	120	0	m:00C0
+c	001E9	0	127	0	127	0	m:00C0
+c	001EE	0	130	0	130	0	m:00C0
+c	001F0	0	131	0	131	0	m:00C0
+e	001F2	m:00C0
+l!	001F5	001F8	r:TRU.MeshMonitor.MeshMonitor	this	m:00F9	0
+e!	001F8	m:00F9
+c	001FB	0	46	0	46	0	m:00FC
+l	001FB	0020A	i	CS$1$0000	m:00FC	3
+l	001FB	0020A	u	Info	m:00FC	0
+l	001FB	0020A	b[]	Buffer	m:00FC	1
+l	001FB	0020A	u	Length	m:00FC	2
+c	00206	0	47	0	47	0	m:00FC
+c	00208	0	48	0	48	0	m:00FC
+e	0020A	m:00FC
 S	C:\Users\Kerberos\Dropbox\Programming\Repos\Mesh-Monitor\MoteRunner\MeshMonitor.cs
 :	namespace TRU.MeshMonitor {
 :		using com.ibm.saguaro.system;
@@ -165,9 +180,13 @@ S	C:\Users\Kerberos\Dropbox\Programming\Repos\Mesh-Monitor\MoteRunner\MeshMonito
 :				LED.setState(IRIS.LED_YELLOW, 1);
 :	
 :				Assembly.setDataHandler(on_Data);
+:	            Assembly.setSystemInfoCallback(on_SysInfo);
 :	            try {
-:	                HumidTempSensor.open(IRIS.DID_MTS400_HUMID_TEMP, null, 0, 0);
+:	                // Init read handlers
+:	                LightSensor.setReadHandler(LightCallback);
 :	                HumidTempSensor.setReadHandler(HumidTempCallback);
+:	
+:	                HumidTempSensor.open(IRIS.DID_MTS400_HUMID_TEMP, null, 0, 0);
 :	                HumidTempSensor.read(Device.TIMED, 4, Time.currentTicks() + Time.toTickSpan(Time.SECONDS, READ_INTERVAL));
 :	
 :	                LED.setState(IRIS.LED_YELLOW, 0);
@@ -177,33 +196,49 @@ S	C:\Users\Kerberos\Dropbox\Programming\Repos\Mesh-Monitor\MoteRunner\MeshMonito
 :	                LED.setState(IRIS.LED_RED, 1);
 :	                return;
 :	            }
-:	
-:				/*
-:	            GPIO_Device.open();
-:				GPIO_Device.configureOutput(LIGHT_PWR_PIN, GPIO.OUT_SET);
-:				ADC_Device.open(ADC_CHANNEL_MASK, GPIO.NO_PIN, 0, 0); // Manual power; No warmup; No interval (ltr)
-:				ADC_Device.setReadHandler(ADCReadCallback);
-:				ADC_Device.read(Device.TIMED, 1, Time.currentTicks() + Time.toTickSpan(Time.SECONDS, READ_INTERVAL));
-:	             */
-:			}
+:	        }
 :	
 :			private static int on_Data(uint Info, byte[] Buffer, uint Length) {
 :				Util.copyData(Buffer, 0, Reply, 0, Length);
 :				return 0;
 :			}
 :	
+:	        private static int on_SysInfo(int Type, int Info)
+:	        {
+:	            if (Type == Assembly.SYSEV_DELETED)
+:	            {
+:	                try
+:	                {
+:	                    if (HumidTempSensor != null)
+:	                    {
+:	                        HumidTempSensor.close();
+:	                    }
+:	                    if (LightSensor != null)
+:	                    {
+:	                        LightSensor.close();
+:	                    }
+:	                }
+:	                catch (MoteException ex)
+:	                {
+:	                }
+:	            }
+:	
+:	            return 0;
+:	        }
+:	
 :	        private static int HumidTempCallback(uint ReadFlags, byte[] ReadData, uint ReadLength, uint ReadInfo, long ReadTime) {
-:	            // Check flags
-:	            if ((ReadFlags & FLAG_FAILED) != 0) {
+:	            if ((ReadFlags & FLAG_FAILED) != 0)
+:	            {
 :	                LED.setState(IRIS.LED_YELLOW, 1);
 :	                LED.setState(IRIS.LED_RED, 1);
+:	                return -1;
 :	            }
 :	            else {
 :	                uint payload_offset = LIP.getPortOff() + 1;
 :	
 :	                // Copy sensor data into reply buffer
 :	                LED.setState(IRIS.LED_YELLOW, 1);
-:	                Util.copyData(new byte[] {0}, 0, Reply, payload_offset, 1); // Humidit+Temperature ID = 0
+:	                Util.copyData(new byte[] {0}, 0, Reply, payload_offset, 1); // Humidity+Temperature ID = 0
 :	                Util.copyData(ReadData, 0, Reply, payload_offset + 1, ReadLength);
 :	
 :	                if (HumidTempSensor.getState() != Device.S_CLOSED) {
@@ -212,8 +247,7 @@ S	C:\Users\Kerberos\Dropbox\Programming\Repos\Mesh-Monitor\MoteRunner\MeshMonito
 :	
 :	                // Queue light sensor read
 :	                LightSensor.open(IRIS.DID_MTS400_LIGHT, null, 0, 0);
-:	                LightSensor.setReadHandler(LightCallback);
-:	                LightSensor.read(Device.TIMED, 2, Time.currentTicks() + 100);
+:	                LightSensor.read(Device.ASAP, 2, 0);
 :	
 :	                LED.setState(IRIS.LED_YELLOW, 0);
 :	            }
@@ -226,6 +260,7 @@ S	C:\Users\Kerberos\Dropbox\Programming\Repos\Mesh-Monitor\MoteRunner\MeshMonito
 :	            if ((ReadFlags & FLAG_FAILED) != 0) {
 :	                LED.setState(IRIS.LED_YELLOW, 1);
 :	                LED.setState(IRIS.LED_RED, 1);
+:	                return -1;
 :	            }
 :	            else {
 :	                uint payload_offset = LIP.getPortOff() + 1;
@@ -236,14 +271,14 @@ S	C:\Users\Kerberos\Dropbox\Programming\Repos\Mesh-Monitor\MoteRunner\MeshMonito
 :	                Util.copyData(ReadData, 0, Reply, payload_offset + 6, ReadLength);
 :	                LIP.send(Reply, 0, REPLY_SIZE);
 :	
-:	                if (LightSensor.getState() != Device.S_CLOSED) {
+:	                if (LightSensor.getState() != Device.S_CLOSED)
+:	                {
 :	                    LightSensor.close();
 :	                }
 :	
 :	                // Queue humidity/temperature sensor read
-:	                HumidTempSensor.open(IRIS.DID_MTS400_HUMID_TEMP, null, 0, 0);
-:	                HumidTempSensor.setReadHandler(HumidTempCallback);
-:	                HumidTempSensor.read(Device.TIMED, 4, Time.currentTicks() + Time.toTickSpan(Time.SECONDS, READ_INTERVAL));
+:	                //HumidTempSensor.open(IRIS.DID_MTS400_HUMID_TEMP, null, 0, 0);
+:	                //HumidTempSensor.read(Device.TIMED, 4, Time.currentTicks() + Time.toTickSpan(Time.SECONDS, READ_INTERVAL));
 :	                
 :	                LED.setState(IRIS.LED_YELLOW, 0);
 :	            }
