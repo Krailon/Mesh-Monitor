@@ -85,18 +85,23 @@ namespace TRU.MeshMonitor {
                 Util.copyData(new byte[] {0}, 0, Reply, payload_offset, 1); // Humidity+Temperature ID = 0
                 Util.copyData(ReadData, 0, Reply, payload_offset + 1, ReadLength);
 
-                if (HumidTempSensor.getState() != Device.S_CLOSED) {
-                    HumidTempSensor.close();
+                try {
+                    if (HumidTempSensor.getState() != Device.S_CLOSED) {
+                        HumidTempSensor.close();
+                    }
+
+                    // Queue light sensor read
+                    LightSensor.open(IRIS.DID_MTS400_LIGHT, null, 0, 0);
+                    LightSensor.read(Device.ASAP, 2, 0);
+                }
+                catch (MoteException ex) {
+                    LED.setState(IRIS.LED_RED, 1);
+                    return -1;
                 }
 
-                // Queue light sensor read
-                LightSensor.open(IRIS.DID_MTS400_LIGHT, null, 0, 0);
-                LightSensor.read(Device.ASAP, 2, 0);
-
                 LED.setState(IRIS.LED_YELLOW, 0);
+                return 0;
             }
-
-            return 0;
         }
 
         private static int LightCallback(uint ReadFlags, byte[] ReadData, uint ReadLength, uint ReadInfo, long ReadTime) {
@@ -115,19 +120,23 @@ namespace TRU.MeshMonitor {
                 Util.copyData(ReadData, 0, Reply, payload_offset + 6, ReadLength);
                 LIP.send(Reply, 0, REPLY_SIZE);
 
-                if (LightSensor.getState() != Device.S_CLOSED)
-                {
-                    LightSensor.close();
-                }
+                try {
+                    if (LightSensor.getState() != Device.S_CLOSED) {
+                        LightSensor.close();
+                    }
 
-                // Queue humidity/temperature sensor read
-                //HumidTempSensor.open(IRIS.DID_MTS400_HUMID_TEMP, null, 0, 0);
-                //HumidTempSensor.read(Device.TIMED, 4, Time.currentTicks() + Time.toTickSpan(Time.SECONDS, READ_INTERVAL));
+                    // Queue humidity/temperature sensor read
+                    HumidTempSensor.open(IRIS.DID_MTS400_HUMID_TEMP, null, 0, 0);
+                    HumidTempSensor.read(Device.TIMED, 4, Time.currentTicks() + Time.toTickSpan(Time.SECONDS, READ_INTERVAL));
+                }
+                catch (MoteException ex) {
+                    LED.setState(IRIS.LED_RED, 1);
+                    return -1;
+                }
                 
                 LED.setState(IRIS.LED_YELLOW, 0);
+                return 0;
             }
-
-            return 0;
         }
 
 		/*
