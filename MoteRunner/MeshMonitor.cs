@@ -6,7 +6,7 @@ namespace TRU.MeshMonitor {
 	public class MeshMonitor {
 		
 		// Globals
-        private const uint MR_PORT = 0x66;
+        private const uint LIP_PORT = 0x66;
         private const uint FLAG_FAILED = 0x40;
 		private const uint REPLY_SIZE = 0x40; // 64
 		private const uint READ_INTERVAL = 5; // 5s
@@ -17,11 +17,9 @@ namespace TRU.MeshMonitor {
         private static SDev AccelSensor = new SDev();
 
 		static MeshMonitor() {
-			LED.setState(IRIS.LED_YELLOW, 1);
-
 			Assembly.setDataHandler(on_Data);
             Assembly.setSystemInfoCallback(on_SysInfo);
-            LIP.open(MR_PORT);
+            LIP.open(LIP_PORT);
 
             try {
                 // Init read handlers
@@ -32,7 +30,6 @@ namespace TRU.MeshMonitor {
                 HumidTempSensor.open(IRIS.DID_MTS400_HUMID_TEMP, null, 0, 0);
                 HumidTempSensor.read(Device.TIMED, 4, Time.currentTicks() + Time.toTickSpan(Time.SECONDS, READ_INTERVAL));
 
-                LED.setState(IRIS.LED_YELLOW, 0);
 			    LED.setState(IRIS.LED_GREEN, 1);
             }
             catch {
@@ -52,6 +49,8 @@ namespace TRU.MeshMonitor {
             {
                 try
                 {
+                    LIP.close(LIP_PORT);
+
                     if (HumidTempSensor != null)
                     {
                         HumidTempSensor.close();
