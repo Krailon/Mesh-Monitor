@@ -39,7 +39,7 @@ namespace TRU.MeshMonitor {
         }
 
         private static int on_Data(uint Info, byte[] Buffer, uint Length) {
-            Util.copyData(Buffer, 0, Reply, 0, Length);
+            //Util.copyData(Buffer, 0, Reply, 0, Length);
             return 0;
         }
 
