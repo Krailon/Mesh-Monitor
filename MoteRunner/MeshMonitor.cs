@@ -84,8 +84,9 @@ namespace TRU.MeshMonitor {
 
                 // Copy sensor data into reply buffer
                 LED.setState(IRIS.LED_YELLOW, 1);
-                Util.copyData(new byte[] {11}, 0, Reply, payload_offset, 1); // Humidity+Temperature ID = 11
-                Util.copyData(ReadData, 0, Reply, payload_offset + 1, ReadLength);
+                Util.copyData(new byte[] { 0x11, 0x22, 0x33, 0x44, 0x55 }, 0, Reply, payload_offset, 1); // debug
+                //Util.copyData(new byte[] {11}, 0, Reply, payload_offset, 1); // Humidity+Temperature ID = 11
+                //Util.copyData(ReadData, 0, Reply, payload_offset + 1, ReadLength);
 
                 try {
                     if (HumidTempSensor.getState() != Device.S_CLOSED) {
@@ -118,8 +119,9 @@ namespace TRU.MeshMonitor {
 
                 // Copy sensor data into reply buffer
                 LED.setState(IRIS.LED_YELLOW, 1);
-                Util.copyData(new byte[] {22}, 0, Reply, payload_offset + 5, 1); // Light ID = 22
-                Util.copyData(ReadData, 0, Reply, payload_offset + 6, ReadLength);
+                Util.copyData(new byte[] { 0x66, 0x77, 0x88 }, 0, Reply, payload_offset + 5, 1); // Debug
+                //Util.copyData(new byte[] {22}, 0, Reply, payload_offset + 5, 1); // Light ID = 22
+                //Util.copyData(ReadData, 0, Reply, payload_offset + 6, ReadLength);
 
                 try {
                     if (LightSensor.getState() != Device.S_CLOSED) {
@@ -154,8 +156,9 @@ namespace TRU.MeshMonitor {
 
                 // Copy sensor data into reply buffer and send
                 LED.setState(IRIS.LED_YELLOW, 1);
-                Util.copyData(new byte[] {33}, 0, Reply, payload_offset + 8, 1); // Acceleration ID = 33
-                Util.copyData(ReadData, 0, Reply, payload_offset + 9, ReadLength);
+                Util.copyData(new byte[] {0x99, 0xAA, 0xBB, 0xCC, 0xDD}, 0, Reply, payload_offset + 8, 1); // debug
+                //Util.copyData(new byte[] {33}, 0, Reply, payload_offset + 8, 1); // Acceleration ID = 33
+                //Util.copyData(ReadData, 0, Reply, payload_offset + 9, ReadLength);
                 LIP.send(Reply, 0, REPLY_SIZE);
 
                 try
