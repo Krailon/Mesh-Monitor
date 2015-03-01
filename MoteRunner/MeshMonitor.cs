@@ -118,7 +118,6 @@ namespace TRU.MeshMonitor {
                 LED.setState(IRIS.LED_YELLOW, 1);
                 Util.copyData(new byte[] {22}, 0, Reply, payload_offset + 5, 1); // Light ID = 22
                 Util.copyData(ReadData, 0, Reply, payload_offset + 6, ReadLength);
-                //LIP.send(Reply, 0, REPLY_SIZE);
 
                 try {
                     if (LightSensor.getState() != Device.S_CLOSED) {
