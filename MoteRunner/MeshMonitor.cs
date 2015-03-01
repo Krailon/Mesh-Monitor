@@ -1,4 +1,5 @@
 namespace TRU.MeshMonitor {
+    using System.Security.Cryptography;
 	using com.ibm.saguaro.system;
 	using com.ibm.iris;
 	
@@ -18,7 +19,7 @@ namespace TRU.MeshMonitor {
 
         private static SDev HumidTempSensor = new SDev();
         private static SDev LightSensor = new SDev();
-        //private static SDev AccelSensor = new SDev();
+        private static SDev AccelSensor = new SDev();
 
 		static MeshMonitor() {
 			LED.setState(IRIS.LED_YELLOW, 1);
@@ -29,6 +30,7 @@ namespace TRU.MeshMonitor {
                 // Init read handlers
                 LightSensor.setReadHandler(LightCallback);
                 HumidTempSensor.setReadHandler(HumidTempCallback);
+                AccelSensor.setReadHandler(AccelCallback);
 
                 HumidTempSensor.open(IRIS.DID_MTS400_HUMID_TEMP, null, 0, 0);
                 HumidTempSensor.read(Device.TIMED, 4, Time.currentTicks() + Time.toTickSpan(Time.SECONDS, READ_INTERVAL));
@@ -61,6 +63,10 @@ namespace TRU.MeshMonitor {
                     {
                         LightSensor.close();
                     }
+                    if (AccelSensor != null)
+                    {
+                        AccelSensor.close();
+                    }
                 }
                 catch (MoteException ex)
                 {
@@ -82,7 +88,7 @@ namespace TRU.MeshMonitor {
 
                 // Copy sensor data into reply buffer
                 LED.setState(IRIS.LED_YELLOW, 1);
-                Util.copyData(new byte[] {0}, 0, Reply, payload_offset, 1); // Humidity+Temperature ID = 0
+                Util.copyData(new byte[] {11}, 0, Reply, payload_offset, 1); // Humidity+Temperature ID = 11
                 Util.copyData(ReadData, 0, Reply, payload_offset + 1, ReadLength);
 
                 try {
@@ -114,26 +120,70 @@ namespace TRU.MeshMonitor {
             else {
                 uint payload_offset = LIP.getPortOff() + 1;
 
-                // Copy sensor data into reply buffer and send
+                // Copy sensor data into reply buffer
                 LED.setState(IRIS.LED_YELLOW, 1);
-                Util.copyData(new byte[] {1}, 0, Reply, payload_offset + 5, 1); // Light ID = 1
+                Util.copyData(new byte[] {22}, 0, Reply, payload_offset + 5, 1); // Light ID = 22
                 Util.copyData(ReadData, 0, Reply, payload_offset + 6, ReadLength);
-                LIP.send(Reply, 0, REPLY_SIZE);
+                //LIP.send(Reply, 0, REPLY_SIZE);
 
                 try {
                     if (LightSensor.getState() != Device.S_CLOSED) {
                         LightSensor.close();
                     }
 
+                    // Queue accelerometer sensor read
+                    AccelSensor.open(IRIS.DID_MTS400_ACCEL, null, 0, 0);
+                    AccelSensor.read(Device.ASAP, 4, 0);
+
                     // Queue humidity/temperature sensor read
-                    HumidTempSensor.open(IRIS.DID_MTS400_HUMID_TEMP, null, 0, 0);
-                    HumidTempSensor.read(Device.TIMED, 4, Time.currentTicks() + Time.toTickSpan(Time.SECONDS, READ_INTERVAL));
+                    //HumidTempSensor.open(IRIS.DID_MTS400_HUMID_TEMP, null, 0, 0);
+                    //HumidTempSensor.read(Device.TIMED, 4, Time.currentTicks() + Time.toTickSpan(Time.SECONDS, READ_INTERVAL));
                 }
                 catch (MoteException ex) {
                     LED.setState(IRIS.LED_RED, 1);
                     return -1;
                 }
                 
+                LED.setState(IRIS.LED_YELLOW, 0);
+                return 0;
+            }
+        }
+
+        private static int AccelCallback(uint ReadFlags, byte[] ReadData, uint ReadLength, uint ReadInfo, long ReadTime)
+        {
+            if ((ReadFlags & FLAG_FAILED) != 0)
+            {
+                LED.setState(IRIS.LED_YELLOW, 1);
+                LED.setState(IRIS.LED_RED, 1);
+                return -1;
+            }
+            else
+            {
+                uint payload_offset = LIP.getPortOff() + 1;
+
+                // Copy sensor data into reply buffer and send
+                LED.setState(IRIS.LED_YELLOW, 1);
+                Util.copyData(new byte[] {33}, 0, Reply, payload_offset + 8, 1); // Acceleration ID = 33
+                Util.copyData(ReadData, 0, Reply, payload_offset + 9, ReadLength);
+                LIP.send(Reply, 0, REPLY_SIZE);
+
+                try
+                {
+                    if (AccelSensor.getState() != Device.S_CLOSED)
+                    {
+                        AccelSensor.close();
+                    }
+
+                    // Queue humidity/temperature sensor read
+                    HumidTempSensor.open(IRIS.DID_MTS400_HUMID_TEMP, null, 0, 0);
+                    HumidTempSensor.read(Device.TIMED, 4, Time.currentTicks() + Time.toTickSpan(Time.SECONDS, READ_INTERVAL));
+                }
+                catch (MoteException ex)
+                {
+                    LED.setState(IRIS.LED_RED, 1);
+                    return -1;
+                }
+
                 LED.setState(IRIS.LED_YELLOW, 0);
                 return 0;
             }
