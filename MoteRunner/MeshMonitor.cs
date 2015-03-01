@@ -6,6 +6,7 @@ namespace TRU.MeshMonitor {
 	public class MeshMonitor {
 		
 		// Globals
+        private const uint MR_PORT = 0x66;
         private const uint FLAG_FAILED = 0x40;
 		private const uint REPLY_SIZE = 0x40; // 64
 		private const uint READ_INTERVAL = 5; // 5s
@@ -20,6 +21,8 @@ namespace TRU.MeshMonitor {
 
 			Assembly.setDataHandler(on_Data);
             Assembly.setSystemInfoCallback(on_SysInfo);
+            LIP.open(MR_PORT);
+
             try {
                 // Init read handlers
                 LightSensor.setReadHandler(LightCallback);
