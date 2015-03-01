@@ -1,23 +1,23 @@
 namespace TRU.MeshMonitor {
     using System.Security.Cryptography;
-	using com.ibm.saguaro.system;
-	using com.ibm.iris;
+    using com.ibm.saguaro.system;
+    using com.ibm.iris;
 	
-	public class MeshMonitor {
+    public class MeshMonitor {
 		
-		// Globals
-        private const uint LIP_PORT = 0x66;
+        // Globals
+        private const byte LIP_PORT = 0x66;
         private const uint FLAG_FAILED = 0x40;
-		private const uint REPLY_SIZE = 0x40; // 64
-		private const uint READ_INTERVAL = 5; // 5s
+        private const uint REPLY_SIZE = 0x40; // 64
+        private const uint READ_INTERVAL = 5; // 5s
 		
-		private static byte[] Reply = new byte[REPLY_SIZE];
+        private static byte[] Reply = new byte[REPLY_SIZE];
         private static SDev HumidTempSensor = new SDev();
         private static SDev LightSensor = new SDev();
         private static SDev AccelSensor = new SDev();
 
-		static MeshMonitor() {
-			Assembly.setDataHandler(on_Data);
+        static MeshMonitor() {
+            Assembly.setDataHandler(on_Data);
             Assembly.setSystemInfoCallback(on_SysInfo);
             LIP.open(LIP_PORT);
 
@@ -38,10 +38,10 @@ namespace TRU.MeshMonitor {
             }
         }
 
-		private static int on_Data(uint Info, byte[] Buffer, uint Length) {
-			Util.copyData(Buffer, 0, Reply, 0, Length);
-			return 0;
-		}
+        private static int on_Data(uint Info, byte[] Buffer, uint Length) {
+            Util.copyData(Buffer, 0, Reply, 0, Length);
+            return 0;
+        }
 
         private static int on_SysInfo(int Type, int Info)
         {
